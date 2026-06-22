@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm -v)",
+      "Bash(pnpm -v)",
+      "Bash(rm -rf \"D:\\\\claude_desktop\\\\网站\\\\.claude\" && ls -la \"D:\\\\claude_desktop\\\\网站\")",
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --turbopack --no-git --use-npm)",
+      "Read(//d/claude_desktop/**)",
+      "Bash(npx create-next-app@latest personal-website --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --turbopack --no-git --use-npm)",
+      "Bash(mv personal-website/* \"D:\\\\claude_desktop\\\\网站\\\\\" && mv personal-website/.* \"D:\\\\claude_desktop\\\\网站\\\\\")",
+      "Bash(rmdir personal-website *)",
+      "Bash(ls -la \"D:\\\\claude_desktop\\\\网站\" && rm -rf \"D:\\\\claude_desktop\\\\personal-website\" && ls -la \"D:\\\\claude_desktop\\\\personal-website\" 2>&1 || echo \"temp dir removed\")",
+      "Bash(npx shadcn@latest init --yes --defaults --template next --base-color zinc)",
+      "Bash(npm install *)",
+      "Bash(npm ls *)",
+      "Bash(pnpm install *)",
+      "Bash(pnpm approve-builds *)",
+      "Bash(pnpm run *)"
+    ]
+  }
+}
