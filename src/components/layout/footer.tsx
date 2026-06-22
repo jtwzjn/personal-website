@@ -17,12 +17,12 @@ export function Footer() {
             GitHub
           </a>
           <a
-            href={siteConfig.links.twitter}
+            href={siteConfig.links.bilibili}
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-foreground"
           >
-            Twitter
+            B站
           </a>
         </div>
       </div>

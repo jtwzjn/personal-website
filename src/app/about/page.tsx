@@ -1,7 +1,6 @@
 import type { Metadata } from 'next'
 import { profile } from '@/content/profile'
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Separator } from '@/components/ui/separator'
 import { siteConfig } from '@/content/site.config'
 
@@ -21,7 +20,7 @@ export default function AboutPage() {
     url: siteConfig.url,
     sameAs: [
       profile.social.github,
-      profile.social.twitter,
+      profile.social.bilibili,
       profile.social.linkedin,
     ],
   }
@@ -37,6 +36,9 @@ export default function AboutPage() {
           <h1 className="text-4xl font-bold tracking-tight">关于我</h1>
           <p className="text-muted-foreground text-xl">{profile.role}</p>
           <p className="max-w-2xl text-lg leading-relaxed">{profile.bio}</p>
+          <p className="text-muted-foreground">
+            中国海洋大学在读学生，专注于数据可视化、全栈开发与 AI 应用。
+          </p>
         </section>
 
         <Separator className="my-12" />
@@ -81,21 +83,9 @@ export default function AboutPage() {
           <h2 className="mb-6 text-2xl font-semibold tracking-tight">
             工作经历
           </h2>
-          <div className="grid gap-4">
-            {profile.experiences.map((exp, index) => (
-              <Card key={index}>
-                <CardHeader>
-                  <CardTitle>{exp.role}</CardTitle>
-                  <p className="text-muted-foreground text-sm">
-                    {exp.company} · {exp.period}
-                  </p>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground">{exp.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
+          <p className="text-muted-foreground">
+            暂无正式工作经历，项目经验请查看项目页面。
+          </p>
         </section>
       </div>
     </>

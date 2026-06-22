@@ -4,7 +4,7 @@ import { getFeaturedProjects } from '@/lib/content/projects'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
-import { ArrowRight, Github, Mail, Twitter } from 'lucide-react'
+import { ArrowRight, Github, Mail } from 'lucide-react'
 
 export default function HomePage() {
   const featuredProjects = getFeaturedProjects(3)
@@ -46,13 +46,13 @@ export default function HomePage() {
             <Github className="h-5 w-5" />
           </a>
           <a
-            href={profile.social.twitter}
+            href={profile.social.bilibili}
             target="_blank"
             rel="noopener noreferrer"
             className="text-muted-foreground hover:text-foreground"
-            aria-label="Twitter"
+            aria-label="Bilibili"
           >
-            <Twitter className="h-5 w-5" />
+            B站
           </a>
         </div>
       </section>

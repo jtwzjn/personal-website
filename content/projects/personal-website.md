@@ -4,7 +4,7 @@ slug: 'personal-website'
 description: '我的工业生产级个人品牌网站，展示项目、技能和进度。'
 status: 'in-progress'
 progress: 75
-githubRepo: 'yourname/personal-website'
+githubRepo: 'jtwzjn/personal-website'
 tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel']
 startedAt: '2025-06-01'
 cover: '/images/projects/personal-website.png'
