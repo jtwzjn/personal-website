@@ -11,8 +11,10 @@ interface TagPageProps {
   params: Promise<{ tag: string }>
 }
 
+export const revalidate = 60
+
 export async function generateStaticParams() {
-  const tags = getAllTags()
+  const tags = await getAllTags()
   return tags.map((tag) => ({ tag }))
 }
 
@@ -20,7 +22,7 @@ export async function generateMetadata({
   params,
 }: TagPageProps): Promise<Metadata> {
   const { tag } = await params
-  const posts = getPostsByTag(tag)
+  const posts = await getPostsByTag(tag)
 
   return {
     title: `标签：${tag}`,
@@ -30,7 +32,7 @@ export async function generateMetadata({
 
 export default async function TagPage({ params }: TagPageProps) {
   const { tag } = await params
-  const posts = getPostsByTag(tag)
+  const posts = await getPostsByTag(tag)
 
   if (posts.length === 0) {
     notFound()
