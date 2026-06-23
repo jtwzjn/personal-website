@@ -7,6 +7,7 @@ export const {
   signIn,
   signOut,
 } = NextAuth({
+  trustHost: true,
   providers: [
     GitHub({
       clientId: process.env.AUTH_GITHUB_ID,
