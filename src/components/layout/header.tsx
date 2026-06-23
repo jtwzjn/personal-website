@@ -1,5 +1,7 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { siteConfig } from '@/content/site.config'
+import { profile } from '@/content/profile'
 import { Github } from 'lucide-react'
 
 const navItems = [
@@ -17,8 +19,14 @@ export function Header() {
           className="group flex items-center gap-2 text-sm font-semibold tracking-tight transition-opacity hover:opacity-80"
           aria-label={`${siteConfig.name} 首页`}
         >
-          <span className="bg-primary text-primary-foreground flex h-6 w-6 items-center justify-center rounded-md text-xs font-bold">
-            {siteConfig.name.charAt(0)}
+          <span className="relative inline-flex h-7 w-7 overflow-hidden rounded-full ring-1 ring-border">
+            <Image
+              src={profile.avatar}
+              alt={siteConfig.name}
+              fill
+              className="object-cover"
+              sizes="28px"
+            />
           </span>
           <span className="hidden sm:inline">{siteConfig.name}</span>
         </Link>
