@@ -8,9 +8,9 @@ interface GitHubRepoCardProps {
 
 export function GitHubRepoCard({ data }: GitHubRepoCardProps) {
   return (
-    <Card>
+    <Card className="glass-card border-0">
       <CardHeader>
-        <CardTitle className="flex items-center gap-2">
+        <CardTitle className="flex items-center gap-2 text-base">
           <Github className="h-5 w-5" />
           GitHub 数据
         </CardTitle>
@@ -33,13 +33,13 @@ export function GitHubRepoCard({ data }: GitHubRepoCardProps) {
         </div>
 
         {data.latestRelease && (
-          <div className="border-t pt-4">
+          <div className="border-t border-border/50 pt-4">
             <p className="text-sm font-medium">最新发布</p>
             <a
               href={data.latestRelease.htmlUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-muted-foreground hover:text-foreground mt-1 inline-flex items-center gap-2 text-sm"
+              className="text-muted-foreground hover:text-foreground mt-1 inline-flex items-center gap-2 text-sm transition-colors"
             >
               <Tag className="h-4 w-4" />
               {data.latestRelease.tagName}

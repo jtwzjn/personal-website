@@ -38,7 +38,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang={siteConfig.locale} className="h-full antialiased">
+    <html lang={siteConfig.locale} className="h-full">
       <body className="bg-background text-foreground flex min-h-full flex-col">
         <Header />
         <main className="flex-1">{children}</main>

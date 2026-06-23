@@ -10,7 +10,7 @@ export const profile = {
   role: '全栈开发者',
   bio: '热爱构建稳定、可扩展的软件系统。专注于现代 Web 技术、DevOps 和开源项目。',
   location: '中国',
-  email: 'yourname@example.com',
+  email: 'wsswwsswijjiijji@163.com',
   avatar: '/images/avatar.png',
   social: {
     github: 'https://github.com/jtwzjn',

@@ -7,7 +7,7 @@ progress: 75
 githubRepo: 'jtwzjn/personal-website'
 tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'Vercel']
 startedAt: '2025-06-01'
-cover: '/images/projects/personal-website.png'
+cover: '/images/projects/personal-website.svg'
 milestones:
   - title: '完成设计文档'
     date: '2025-06-22'

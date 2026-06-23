@@ -7,7 +7,7 @@ export const siteConfig = {
   links: {
     github: 'https://github.com/jtwzjn',
     bilibili: 'https://space.bilibili.com/488081089',
-    email: 'mailto:yourname@example.com',
+    email: 'mailto:wsswwsswijjiijji@163.com',
   },
   locale: 'zh-CN',
 }

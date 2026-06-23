@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg-bili" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f8fafc"/>
+      <stop offset="100%" stop-color="#e2e8f0"/>
+    </linearGradient>
+    <linearGradient id="b1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fb7185" stop-opacity="0.35"/>
+      <stop offset="100%" stop-color="#f43f5e" stop-opacity="0.12"/>
+    </linearGradient>
+    <linearGradient id="b2" x1="100%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.08"/>
+    </linearGradient>
+    <clipPath id="rounded">
+      <rect width="800" height="500" rx="32"/>
+    </clipPath>
+  </defs>
+  <rect width="800" height="500" fill="url(#bg-bili)"/>
+  <g clip-path="url(#rounded)">
+    <circle cx="680" cy="80" r="240" fill="url(#b1)"/>
+    <circle cx="80" cy="440" r="260" fill="url(#b2)"/>
+    <rect x="180" y="140" width="440" height="260" rx="24" fill="rgba(255,255,255,0.72)" stroke="rgba(255,255,255,0.9)" stroke-width="2"/>
+    <rect x="230" y="190" width="120" height="80" rx="12" fill="#fecdd3"/>
+    <rect x="370" y="190" width="120" height="80" rx="12" fill="#fed7aa"/>
+    <rect x="510" y="190" width="70" height="80" rx="12" fill="#e2e8f0"/>
+    <rect x="230" y="300" width="350" height="12" rx="6" fill="#e2e8f0"/>
+    <rect x="230" y="330" width="260" height="12" rx="6" fill="#e2e8f0"/>
+    <circle cx="260" cy="230" r="14" fill="#f43f5e" opacity="0.85"/>
+    <circle cx="410" cy="230" r="14" fill="#f59e0b" opacity="0.85"/>
+  </g>
+</svg>

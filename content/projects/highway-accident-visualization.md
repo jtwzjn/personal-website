@@ -7,7 +7,7 @@ progress: 100
 githubRepo: 'jtwzjn/highway-accident-visualization'
 tags: ['Flask', 'Python', 'D3.js', 'Leaflet', 'Three.js', 'GeoJSON']
 startedAt: '2026-04-01'
-cover: '/images/projects/highway-accident-visualization.png'
+cover: '/images/projects/highway-accident-visualization.svg'
 milestones:
   - title: '完成数据接口设计'
     date: '2026-04-15'
