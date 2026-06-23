@@ -1,9 +1,11 @@
 import type { MetadataRoute } from 'next'
 import { siteConfig } from '@/content/site.config'
 import { getAllProjectSlugs } from '@/lib/content/projects'
+import { getAllTags, getPostMetaForSitemap } from '@/lib/content/posts'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const projectSlugs = getAllProjectSlugs()
+  const tags = getAllTags()
 
   const routes: MetadataRoute.Sitemap = [
     {
@@ -24,6 +26,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'weekly',
       priority: 0.9,
     },
+    {
+      url: `${siteConfig.url}/blog`,
+      lastModified: new Date(),
+      changeFrequency: 'weekly',
+      priority: 0.9,
+    },
   ]
 
   const projectRoutes: MetadataRoute.Sitemap = projectSlugs.map((slug) => ({
@@ -33,5 +41,21 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  return [...routes, ...projectRoutes]
+  const postRoutes: MetadataRoute.Sitemap = getPostMetaForSitemap().map(
+    ({ slug, lastModified }) => ({
+      url: `${siteConfig.url}/blog/${slug}`,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 0.7,
+    })
+  )
+
+  const tagRoutes: MetadataRoute.Sitemap = tags.map((tag) => ({
+    url: `${siteConfig.url}/blog/tags/${tag}`,
+    lastModified: new Date(),
+    changeFrequency: 'weekly',
+    priority: 0.5,
+  }))
+
+  return [...routes, ...projectRoutes, ...postRoutes, ...tagRoutes]
 }
