@@ -48,5 +48,8 @@ next-env.d.ts
 playwright-report/
 test-results/
 
+.claude/
+*.memory.md
+
 # logs
 *.log
