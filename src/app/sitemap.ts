@@ -3,9 +3,10 @@ import { siteConfig } from '@/content/site.config'
 import { getAllProjectSlugs } from '@/lib/content/projects'
 import { getAllTags, getPostMetaForSitemap } from '@/lib/content/posts'
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projectSlugs = getAllProjectSlugs()
-  const tags = getAllTags()
+  const tags = await getAllTags()
+  const postMeta = await getPostMetaForSitemap()
 
   const routes: MetadataRoute.Sitemap = [
     {
@@ -41,7 +42,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.7,
   }))
 
-  const postRoutes: MetadataRoute.Sitemap = getPostMetaForSitemap().map(
+  const postRoutes: MetadataRoute.Sitemap = postMeta.map(
     ({ slug, lastModified }) => ({
       url: `${siteConfig.url}/blog/${slug}`,
       lastModified,

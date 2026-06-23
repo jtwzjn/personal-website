@@ -11,9 +11,11 @@ export const metadata: Metadata = {
   description: '分享技术思考、项目经验与学习笔记。',
 }
 
-export default function BlogPage() {
-  const posts = getAllPosts()
-  const tags = getAllTags()
+export const revalidate = 60
+
+export default async function BlogPage() {
+  const posts = await getAllPosts()
+  const tags = await getAllTags()
 
   return (
     <div className="container-industrial py-16 sm:py-24">
