@@ -17,7 +17,7 @@ tags:
     'MySQL',
   ]
 startedAt: '2026-01-01'
-cover: '/images/projects/bilibili-video-analysis.png'
+cover: '/images/projects/bilibili-video-analysis.svg'
 milestones:
   - title: '完成数据采集'
     date: '2026-01-15'
