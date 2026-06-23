@@ -1,0 +1,125 @@
+backend:
+  name: github
+  branch: main
+  repo: jtwzjn/personal-website
+  base_url: https://jtwzjn.icu
+  auth_endpoint: /api/auth
+
+media_folder: public/images/uploads
+public_folder: /images/uploads
+
+publish_mode: editorial_workflow
+
+slug:
+  encoding: unicode
+  clean_accents: false
+  sanitize_replacement: '-'
+
+collections:
+  - name: posts
+    label: 博客文章
+    folder: content/posts
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    path: '{{slug}}/index'
+    extension: md
+    format: frontmatter
+    editor:
+      preview: false
+    fields:
+      - label: 标题
+        name: title
+        widget: string
+        required: true
+
+      - label: 链接标识
+        name: slug
+        widget: string
+        required: true
+        hint: 文章的 URL 标识，如 hello-world
+
+      - label: 摘要
+        name: description
+        widget: text
+        required: true
+
+      - label: 发布时间
+        name: publishedAt
+        widget: datetime
+        required: true
+        date_format: YYYY-MM-DD
+        time_format: false
+        format: YYYY-MM-DD
+
+      - label: 更新时间
+        name: updatedAt
+        widget: datetime
+        required: false
+        date_format: YYYY-MM-DD
+        time_format: false
+        format: YYYY-MM-DD
+
+      - label: 标签
+        name: tags
+        widget: list
+        required: false
+        field: { label: 标签, name: tag, widget: string }
+
+      - label: 封面图
+        name: cover
+        widget: image
+        required: false
+        hint: 可选，会显示在文章顶部
+
+      - label: 草稿
+        name: draft
+        widget: boolean
+        default: false
+        required: false
+
+      - label: 正文
+        name: body
+        widget: markdown
+        required: true
+
+  - name: projects
+    label: 项目
+    folder: content/projects
+    create: true
+    delete: true
+    slug: '{{slug}}'
+    extension: md
+    format: frontmatter
+    editor:
+      preview: false
+    fields:
+      - { label: 标题, name: title, widget: string, required: true }
+      - { label: 链接标识, name: slug, widget: string, required: true }
+      - { label: 描述, name: description, widget: text, required: true }
+      - label: 状态
+        name: status
+        widget: select
+        options:
+          - { label: 开发中, value: in-progress }
+          - { label: 已完成, value: completed }
+          - { label: 已归档, value: archived }
+        default: in-progress
+      - { label: 进度, name: progress, widget: number, value_type: int, min: 0, max: 100, default: 0 }
+      - { label: GitHub 仓库, name: githubRepo, widget: string, required: false }
+      - label: 标签
+        name: tags
+        widget: list
+        required: false
+        field: { label: 标签, name: tag, widget: string }
+      - { label: 开始时间, name: startedAt, widget: datetime, date_format: YYYY-MM-DD, time_format: false, format: YYYY-MM-DD, required: false }
+      - { label: 封面图, name: cover, widget: image, required: false }
+      - label: 里程碑
+        name: milestones
+        widget: list
+        required: false
+        fields:
+          - { label: 标题, name: title, widget: string }
+          - { label: 日期, name: date, widget: datetime, date_format: YYYY-MM-DD, time_format: false, format: YYYY-MM-DD, required: false }
+          - { label: 已完成, name: completed, widget: boolean, default: false }
+      - { label: 正文, name: body, widget: markdown, required: true }
