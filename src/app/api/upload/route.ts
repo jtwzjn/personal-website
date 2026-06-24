@@ -2,6 +2,9 @@ import { NextRequest, NextResponse } from 'next/server'
 import { auth } from '@/auth'
 import { put } from '@vercel/blob'
 
+export const runtime = 'nodejs'
+export const dynamic = 'force-dynamic'
+
 export async function POST(request: NextRequest) {
   const session = await auth()
 
@@ -45,7 +48,12 @@ export async function POST(request: NextRequest) {
   } catch (error) {
     console.error('Image upload failed:', error)
     return NextResponse.json(
-      { error: 'Failed to upload image' },
+      {
+        error:
+          error instanceof Error
+            ? error.message
+            : 'Failed to upload image',
+      },
       { status: 500 }
     )
   }
