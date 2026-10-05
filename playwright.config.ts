@@ -14,7 +14,12 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        // 使用完整 Chromium 的新无头模式，而不是 chromium_headless_shell：
+        // 渲染路径与有头浏览器一致，e2e 结果更贴近真实用户所见。
+        channel: 'chromium',
+      },
     },
   ],
   webServer: {

@@ -35,12 +35,26 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
   ])
 
   const total = categories.reduce((sum, item) => sum + item.count, 0)
+
+  // 默认栏目始终要有入口：当数据库里还没有该栏目的文章时（例如本地未配置
+  // POSTGRES_URL，或文章尚未创建），列表为空但仍应可选中，
+  // 否则默认视图会出现「没有任何标签高亮」的困惑状态。
+  const categoryTabs = categories.map((item) => ({
+    label: item.category,
+    value: item.category,
+    count: item.count,
+  }))
+
+  if (!categoryTabs.some((tab) => tab.value === DEFAULT_VIEW_CATEGORY)) {
+    categoryTabs.unshift({
+      label: DEFAULT_VIEW_CATEGORY,
+      value: DEFAULT_VIEW_CATEGORY,
+      count: 0,
+    })
+  }
+
   const tabs = [
-    ...categories.map((item) => ({
-      label: item.category,
-      value: item.category,
-      count: item.count,
-    })),
+    ...categoryTabs,
     { label: ALL_CATEGORY, value: ALL_CATEGORY, count: total },
   ]
 

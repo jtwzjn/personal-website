@@ -12,8 +12,9 @@ test.describe('首页', () => {
     await page.goto('/')
 
     await expect(page.getByRole('heading', { level: 1 })).toHaveText('hcr')
+    // 定位文案在 hero 与资料卡各出现一次，取第一个即可
     await expect(
-      page.getByText('数据科学与大数据技术 · 全栈开发')
+      page.getByText('数据科学与大数据技术 · 全栈开发').first()
     ).toBeVisible()
     await expect(page.getByRole('heading', { name: '精选项目' })).toBeVisible()
     await expect(page.getByRole('heading', { name: '技能栈' })).toBeVisible()
@@ -111,15 +112,22 @@ test.describe('项目列表与详情', () => {
     )
 
     // 关键数据必须与仓库中的原始材料一致（防止再次出现虚高数字）
-    await expect(page.getByText('377,892').first()).toBeVisible()
-    await expect(page.getByText('342,450').first()).toBeVisible()
+    await expect(page.getByText(/377,892/).first()).toBeVisible()
+    await expect(page.getByText(/342,450/).first()).toBeVisible()
 
-    await expect(page.getByRole('heading', { name: '里程碑' })).toBeVisible()
+    // 「里程碑」由 CardTitle 渲染为 div，没有 heading 角色
+    await expect(page.getByText('里程碑').first()).toBeVisible()
+    await expect(page.getByText('源代码').first()).toBeVisible()
+
     await expect(
       page.locator(
         'a[href="https://github.com/jtwzjn/bilibili-video-analysis"]'
       )
     ).toBeVisible()
+
+    // 已完成项目展示项目周期，而不是无信息量的「进度 100%」
+    await expect(page.getByText(/项目周期：\d{4} 年/)).toBeVisible()
+    await expect(page.getByText('开发进度')).toHaveCount(0)
   })
 
   test('加州项目详情页展示真实截图与 AI 实验数据', async ({ page }) => {
@@ -143,11 +151,14 @@ test.describe('项目列表与详情', () => {
     ).toBeVisible()
   })
 
-  test('个人网站详情页展示项目周期而非无意义的进度条', async ({ page }) => {
+  test('进行中的项目展示进度条，已完成项目展示项目周期', async ({ page }) => {
+    // 个人网站仍在迭代中（status: in-progress）
     await page.goto('/projects/personal-website')
+    await expect(page.getByText('开发进度')).toBeVisible()
 
+    // 加州项目已完成（status: completed）
+    await page.goto('/projects/highway-accident-visualization')
     await expect(page.getByText(/项目周期：\d{4} 年/)).toBeVisible()
-    // 已完成项目不应出现「开发进度」100% 的进度条
     await expect(page.getByText('开发进度')).toHaveCount(0)
   })
 })
