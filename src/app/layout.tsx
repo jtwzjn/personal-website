@@ -1,6 +1,8 @@
 import type { Metadata } from 'next'
 import './globals.css'
 import { siteConfig } from '@/content/site.config'
+import { profile } from '@/content/profile'
+import { allSkills } from '@/content/resume'
 import { Analytics } from '@vercel/analytics/react'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { Header } from '@/components/layout/header'
@@ -42,6 +44,34 @@ export const metadata: Metadata = {
 }
 
 /**
+ * 结构化数据（JSON-LD）：帮助搜索引擎把本站识别为「个人 + 个人站点」，
+ * 并建立与 GitHub / Bilibili 账号的关联（sameAs）。
+ * 注意：这里刻意不放 email——邮件地址已在页面中以 mailto 供人使用，
+ * 而结构化数据更容易被爬虫批量采集。
+ */
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'Person',
+      name: profile.name,
+      url: siteConfig.url,
+      jobTitle: profile.role,
+      description: profile.bio,
+      sameAs: [profile.social.github, profile.social.bilibili],
+      knowsAbout: allSkills,
+    },
+    {
+      '@type': 'WebSite',
+      name: siteConfig.name,
+      url: siteConfig.url,
+      description: siteConfig.description,
+      inLanguage: siteConfig.locale,
+    },
+  ],
+}
+
+/**
  * 主题初始化脚本：在首屏绘制前读取本地偏好并写入 <html> 的 class，
  * 避免「先亮后暗」的闪烁。必须内联且阻塞执行，故直接渲染为字符串。
  * CSP 已允许 'unsafe-inline' 的脚本，因此无需额外 nonce。
@@ -57,6 +87,10 @@ export default function RootLayout({
     // suppressHydrationWarning：上面的脚本会在 React 注水前修改 <html> 的 class
     <html lang={siteConfig.locale} className="h-full" suppressHydrationWarning>
       <body className="bg-background text-foreground flex min-h-full flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+        />
         <script dangerouslySetInnerHTML={{ __html: themeInitScript }} />
         <Header />
         <main className="flex-1">{children}</main>

@@ -241,4 +241,30 @@ test.describe('错误页与 SEO 端点', () => {
     expect(res.status()).toBe(200)
     expect(await res.text()).toContain('sitemap.xml')
   })
+
+  // 项目页声称「提供 JSON-LD 结构化数据」，此用例确保该声明始终为真
+  test('输出可解析的 JSON-LD 结构化数据', async ({ page }) => {
+    await page.goto('/')
+
+    const raw = await page
+      .locator('script[type="application/ld+json"]')
+      .first()
+      .textContent()
+    expect(raw, '页面中不存在 JSON-LD').toBeTruthy()
+
+    const data = JSON.parse(raw as string)
+    const nodes = data['@graph'] as Array<Record<string, unknown>>
+    const types = nodes.map((n) => n['@type'])
+
+    expect(types).toContain('Person')
+    expect(types).toContain('WebSite')
+
+    const person = nodes.find((n) => n['@type'] === 'Person')!
+    expect(person.name).toBe('hcr')
+    expect(person.url).toBe('https://jtwzjn.icu')
+    // 与外部账号建立关联
+    expect(person.sameAs).toContain('https://github.com/jtwzjn')
+    // 不应把邮箱放进结构化数据（更易被爬虫批量采集）
+    expect(JSON.stringify(person)).not.toContain('@163.com')
+  })
 })

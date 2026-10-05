@@ -8,7 +8,7 @@ githubRepo: 'jtwzjn/personal-website'
 featured: 3
 tags: ['Next.js', 'TypeScript', 'Tailwind CSS', 'PostgreSQL', 'Vercel']
 startedAt: '2026-06-22'
-cover: '/images/projects/personal-website.svg'
+cover: '/images/projects/personal-website/01-home.png'
 milestones:
   - title: '完成站点脚手架与 CI/CD 流水线'
     date: '2026-06-22'
@@ -38,8 +38,9 @@ milestones:
 
 - **项目展示**：Markdown + YAML frontmatter 驱动，支持状态、进度、里程碑与 GitHub 仓库数据联动。
 - **博客系统**：内容存储在 PostgreSQL，提供基于 GitHub OAuth 的在线编辑后台，支持草稿、标签、封面图上传。
-- **工程化**：ESLint + Prettier + TypeScript + Vitest，GitHub Actions 三段式流水线（质量检查 / 单元测试 / 生产构建）。
-- **安全与 SEO**：配置 CSP、HSTS 等安全响应头，提供 sitemap.xml、robots.txt 与 JSON-LD 结构化数据。
+- **工程化**：ESLint + Prettier + TypeScript + Vitest + Playwright，GitHub Actions 四段式流水线（质量检查 / 单元测试 / 生产构建 / 端到端测试）。
+- **安全与 SEO**：配置 CSP、HSTS 等安全响应头，提供 sitemap.xml、robots.txt 与 JSON-LD 结构化数据（Person + WebSite，并与 GitHub / Bilibili 账号建立 sameAs 关联）。
+- **深浅色主题**：同一套设计 token 支持两套主题，首屏由阻塞脚本读取本地偏好，避免「先亮后暗」闪烁。
 
 ### 技术亮点
 
@@ -50,5 +51,22 @@ milestones:
 
 ### 后续计划
 
-- 补充在线简历页与可下载 PDF，强化求职场景下的信息密度。
 - 将《基于大数据的哔哩哔哩视频数据分析与综合评分可视化系统》毕业设计整理为完整的技术复盘专栏。
+
+## 系统界面
+
+**首页**：hero 区、资料卡与按类别分组的技能栈（27 项技能取自简历数据的同一份来源，避免多处维护）。
+
+![首页](/images/projects/personal-website/01-home.png)
+
+**在线简历页**：求职意向、教育背景与技能栈均来自结构化的 `resume.ts`，空板块自动隐藏；完整简历通过邮件索取，不在公开站点直接提供文件。
+
+![简历页](/images/projects/personal-website/02-resume.png)
+
+**博客列表**：技术 / 日常栏目筛选与标签导航。内容存储在 PostgreSQL，可通过后台在线编辑，无需重新部署即可发布。
+
+![博客列表](/images/projects/personal-website/04-blog.png)
+
+**深色模式**：与浅色共用同一套设计 token，切换后写入 localStorage；首屏由阻塞脚本恢复偏好，不出现闪白。
+
+![深色模式](/images/projects/personal-website/05-dark-mode.png)

@@ -55,10 +55,11 @@ test-results/
 *.local.md
 *.local.json
 *.local.ps1
+*.local.sh
+*.local.ts
 
 # 临时暂存目录（跨仓库搬运产物时使用，不属于本站源码）
 .staging-*/
 
 # logs
 *.log
-*.local.sh
