@@ -61,3 +61,4 @@ test-results/
 
 # logs
 *.log
+*.local.sh
