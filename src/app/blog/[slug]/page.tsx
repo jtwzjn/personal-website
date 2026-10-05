@@ -125,11 +125,19 @@ export default async function PostPage({ params }: PostPageProps) {
 
             {post.frontmatter.tags.length > 0 && (
               <div className="flex flex-wrap gap-2">
+                <Link href={`/blog?category=${encodeURIComponent(post.frontmatter.category)}`}>
+                  <Badge
+                    variant="outline"
+                    className="border-industrial/40 text-industrial px-3 py-1 text-sm font-medium transition-colors"
+                  >
+                    {post.frontmatter.category}
+                  </Badge>
+                </Link>
                 {post.frontmatter.tags.map((tag) => (
-                  <Link key={tag} href={`/blog/tags/${tag}`}>
+                  <Link key={tag} href={`/blog/tags/${encodeURIComponent(tag)}`}>
                     <Badge
                       variant="secondary"
-                      className="bg-accent/60 px-3 py-1 text-sm font-medium transition-colors hover:bg-accent"
+                      className="bg-accent/60 hover:bg-accent px-3 py-1 text-sm font-medium transition-colors"
                     >
                       {tag}
                     </Badge>

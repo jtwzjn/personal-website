@@ -35,6 +35,7 @@ export function EditPostForm({ post, action }: EditPostFormProps) {
           content: post.content,
           cover: post.frontmatter.cover,
           tags: post.frontmatter.tags.join(', '),
+          category: post.frontmatter.category,
           draft: post.frontmatter.draft,
           publishedAt: post.frontmatter.publishedAt
             ? new Date(post.frontmatter.publishedAt).toISOString().split('T')[0]

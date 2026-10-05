@@ -14,6 +14,7 @@ interface PostFormFieldsProps {
     content?: string
     cover?: string
     tags?: string
+    category?: string
     draft?: boolean
     publishedAt?: string
   }
@@ -141,16 +142,32 @@ export function PostFormFields({ defaultValues }: PostFormFieldsProps) {
           />
         </div>
 
-        <div className="flex items-center gap-3 pt-6">
-          <Switch
-            id="draft"
-            name="draft"
-            defaultChecked={defaultValues?.draft ?? false}
-          />
-          <Label htmlFor="draft" className="cursor-pointer">
-            存为草稿
-          </Label>
+        <div className="flex flex-col gap-2">
+          <Label htmlFor="category">栏目</Label>
+          <select
+            id="category"
+            name="category"
+            defaultValue={defaultValues?.category ?? '技术'}
+            className="bg-background/50 w-full rounded-xl border border-input px-4 py-2 text-sm outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/50"
+          >
+            <option value="技术">技术</option>
+            <option value="日常">日常</option>
+          </select>
+          <p className="text-muted-foreground text-xs">
+            「日常」栏目不会出现在博客默认视图，方便访客只看技术内容。
+          </p>
         </div>
+      </div>
+
+      <div className="flex items-center gap-3">
+        <Switch
+          id="draft"
+          name="draft"
+          defaultChecked={defaultValues?.draft ?? false}
+        />
+        <Label htmlFor="draft" className="cursor-pointer">
+          存为草稿
+        </Label>
       </div>
 
       <div className="flex flex-col gap-2">

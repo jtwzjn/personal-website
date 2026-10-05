@@ -3,6 +3,10 @@ import { siteConfig } from '@/content/site.config'
 import { getAllProjectSlugs } from '@/lib/content/projects'
 import { getAllTags, getPostMetaForSitemap } from '@/lib/content/posts'
 
+// Blog posts live in the database and change without a redeploy, so this
+// metadata route must revalidate instead of being frozen at build time.
+export const revalidate = 300
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const projectSlugs = getAllProjectSlugs()
   const tags = await getAllTags()
@@ -26,6 +30,12 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       lastModified: new Date(),
       changeFrequency: 'weekly',
       priority: 0.9,
+    },
+    {
+      url: `${siteConfig.url}/resume`,
+      lastModified: new Date(),
+      changeFrequency: 'monthly',
+      priority: 0.95,
     },
     {
       url: `${siteConfig.url}/blog`,
@@ -52,7 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   )
 
   const tagRoutes: MetadataRoute.Sitemap = tags.map((tag) => ({
-    url: `${siteConfig.url}/blog/tags/${tag}`,
+    url: `${siteConfig.url}/blog/tags/${encodeURIComponent(tag)}`,
     lastModified: new Date(),
     changeFrequency: 'weekly',
     priority: 0.5,

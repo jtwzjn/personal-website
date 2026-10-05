@@ -7,6 +7,7 @@ import {
   createPost,
   updatePost,
   deletePost,
+  DEFAULT_CATEGORY,
   CreatePostInput,
   UpdatePostInput,
 } from '@/lib/content/posts'
@@ -26,6 +27,8 @@ function parsePostFormData(formData: FormData): CreatePostInput {
   const content = String(formData.get('content') ?? '').trim()
   const cover = String(formData.get('cover') ?? '').trim() || undefined
   const tagsString = String(formData.get('tags') ?? '').trim()
+  const category =
+    String(formData.get('category') ?? '').trim() || DEFAULT_CATEGORY
   const draft = formData.get('draft') === 'on'
   const publishedAt = String(formData.get('publishedAt') ?? '').trim() || undefined
 
@@ -50,6 +53,7 @@ function parsePostFormData(formData: FormData): CreatePostInput {
     content,
     cover,
     tags,
+    category,
     draft,
     publishedAt,
   }
@@ -64,6 +68,7 @@ function parseUpdateFormData(formData: FormData): UpdatePostInput {
   const content = String(formData.get('content') ?? '').trim()
   const cover = String(formData.get('cover') ?? '').trim()
   const tagsString = String(formData.get('tags') ?? '').trim()
+  const category = String(formData.get('category') ?? '').trim()
   const draft = formData.get('draft')
   const publishedAt = String(formData.get('publishedAt') ?? '').trim()
 
@@ -82,6 +87,7 @@ function parseUpdateFormData(formData: FormData): UpdatePostInput {
     .split(/[,，]/)
     .map((tag) => tag.trim())
     .filter(Boolean)
+  if (category) input.category = category
   input.draft = draft === 'on'
   input.publishedAt = publishedAt || undefined
 

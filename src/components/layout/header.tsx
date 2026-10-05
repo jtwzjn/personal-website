@@ -7,6 +7,7 @@ import { Github } from 'lucide-react'
 const navItems = [
   { href: '/about', label: '关于' },
   { href: '/projects', label: '项目' },
+  { href: '/resume', label: '简历' },
   { href: '/blog', label: '博客' },
 ]
 

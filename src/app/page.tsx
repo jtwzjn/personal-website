@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { profile } from '@/content/profile'
-import { getFeaturedProjects } from '@/lib/content/projects'
+import { allSkills, resume } from '@/content/resume'
+import { getFeaturedProjects, getAllProjects } from '@/lib/content/projects'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Progress } from '@/components/ui/progress'
@@ -9,6 +10,7 @@ import Image from 'next/image'
 
 export default function HomePage() {
   const featuredProjects = getFeaturedProjects(3)
+  const projectCount = getAllProjects().length
 
   return (
     <div className="flex flex-col">
@@ -68,7 +70,7 @@ export default function HomePage() {
             </div>
           </div>
 
-          <ProfileCard />
+          <ProfileCard projectCount={projectCount} />
         </div>
       </section>
 
@@ -79,15 +81,22 @@ export default function HomePage() {
             <h2 className="text-2xl font-semibold tracking-tight">技能栈</h2>
           </div>
         </div>
-        <div className="glass-card flex flex-wrap gap-2 rounded-2xl p-5">
-          {profile.skills.map((skill) => (
-            <Badge
-              key={skill}
-              variant="secondary"
-              className="px-3 py-1.5 text-sm font-medium"
-            >
-              {skill}
-            </Badge>
+        <div className="grid gap-4 md:grid-cols-2">
+          {resume.skillGroups.map((group) => (
+            <div key={group.label} className="glass-card rounded-2xl p-5">
+              <p className="section-label mb-3">{group.label}</p>
+              <div className="flex flex-wrap gap-2">
+                {group.items.map((item) => (
+                  <Badge
+                    key={item}
+                    variant="secondary"
+                    className="px-3 py-1.5 text-sm font-medium"
+                  >
+                    {item}
+                  </Badge>
+                ))}
+              </div>
+            </div>
           ))}
         </div>
       </section>
@@ -141,13 +150,29 @@ export default function HomePage() {
                     {project.frontmatter.description}
                   </p>
                   <div className="space-y-2">
-                    <div className="flex justify-between text-xs">
-                      <span className="text-muted-foreground">进度</span>
-                      <span className="font-mono font-medium">
-                        {project.frontmatter.progress}%
-                      </span>
-                    </div>
-                    <Progress value={project.frontmatter.progress} />
+                    {project.frontmatter.status === 'in-progress' ? (
+                      <>
+                        <div className="flex justify-between text-xs">
+                          <span className="text-muted-foreground">开发进度</span>
+                          <span className="font-mono font-medium">
+                            {project.frontmatter.progress}%
+                          </span>
+                        </div>
+                        <Progress value={project.frontmatter.progress} />
+                      </>
+                    ) : (
+                      <div className="flex flex-wrap gap-1.5">
+                        {project.frontmatter.tags.slice(0, 4).map((tag) => (
+                          <Badge
+                            key={tag}
+                            variant="secondary"
+                            className="bg-accent/60 text-xs font-medium"
+                          >
+                            {tag}
+                          </Badge>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 </CardContent>
               </Card>
@@ -159,7 +184,7 @@ export default function HomePage() {
   )
 }
 
-function ProfileCard() {
+function ProfileCard({ projectCount }: { projectCount: number }) {
   return (
     <div className="glass-strong relative rounded-3xl p-6 sm:p-8"
     >
@@ -193,8 +218,8 @@ function ProfileCard() {
 
         <div className="grid w-full grid-cols-2 gap-3"
         >
-          <Stat label="项目" value="3+" />
-          <Stat label="状态" value="活跃" />
+          <Stat label="项目" value={`${projectCount}`} />
+          <Stat label="技术栈" value={`${allSkills.length}`} />
         </div>
       </div>
     </div>

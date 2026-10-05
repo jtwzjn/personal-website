@@ -71,15 +71,17 @@ export default function ProjectsPage() {
               </CardHeader>
 
               <CardContent className="space-y-5">
-                <div className="space-y-2">
-                  <div className="flex justify-between text-xs">
-                    <span className="text-muted-foreground">开发进度</span>
-                    <span className="font-mono font-medium">
-                      {project.frontmatter.progress}%
-                    </span>
+                {project.frontmatter.status === 'in-progress' && (
+                  <div className="space-y-2">
+                    <div className="flex justify-between text-xs">
+                      <span className="text-muted-foreground">开发进度</span>
+                      <span className="font-mono font-medium">
+                        {project.frontmatter.progress}%
+                      </span>
+                    </div>
+                    <Progress value={project.frontmatter.progress} />
                   </div>
-                  <Progress value={project.frontmatter.progress} />
-                </div>
+                )}
 
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div className="flex flex-wrap gap-2">

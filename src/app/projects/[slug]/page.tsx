@@ -7,7 +7,7 @@ import { Badge } from '@/components/ui/badge'
 import { Progress } from '@/components/ui/progress'
 import { Separator } from '@/components/ui/separator'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
-import { CheckCircle2, Circle, Calendar, ArrowLeft } from 'lucide-react'
+import { CheckCircle2, Circle, Calendar, ArrowLeft, Github } from 'lucide-react'
 import { siteConfig } from '@/content/site.config'
 import { fetchGitHubRepoData } from '@/lib/github'
 import { GitHubRepoCard } from '@/components/github-repo-card'
@@ -187,17 +187,32 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
             {project.frontmatter.githubRepo && (
               <Card className="glass-card border-0">
                 <CardHeader>
-                  <CardTitle className="text-base">GitHub</CardTitle>
+                  <CardTitle className="text-base">源代码</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <a
-                    href={`https://github.com/${project.frontmatter.githubRepo}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-foreground hover:text-industrial break-all font-mono text-sm transition-colors hover:underline"
-                  >
-                    {project.frontmatter.githubRepo}
-                  </a>
+                  {project.frontmatter.githubRepoStatus === 'pending' ? (
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      代码正在整理与脱敏，完成后将开源至{' '}
+                      <span className="font-mono">
+                        {project.frontmatter.githubRepo}
+                      </span>
+                      。面试时可提供完整源码与本地演示。
+                    </p>
+                  ) : project.frontmatter.githubRepoStatus === 'private' ? (
+                    <p className="text-muted-foreground text-sm leading-relaxed">
+                      该项目仓库不公开（涉及协作方数据）。面试时可提供完整源码与本地演示。
+                    </p>
+                  ) : (
+                    <a
+                      href={`https://github.com/${project.frontmatter.githubRepo}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-foreground hover:text-industrial inline-flex items-center gap-2 break-all font-mono text-sm transition-colors hover:underline"
+                    >
+                      <Github className="h-4 w-4 shrink-0" />
+                      {project.frontmatter.githubRepo}
+                    </a>
+                  )}
                 </CardContent>
               </Card>
             )}

@@ -9,6 +9,17 @@ export interface ProjectFrontmatter {
   status: 'in-progress' | 'completed' | 'archived'
   progress: number
   githubRepo?: string
+  /**
+   * 仓库可见性。默认为 'public'，此时页面直接渲染可点击的仓库链接。
+   * 'pending' 表示代码仍在整理、尚未开源，'private' 表示仓库不公开，
+   * 两种情况都不会渲染成死链，而是给出诚实的说明文案。
+   */
+  githubRepoStatus?: 'public' | 'pending' | 'private'
+  /**
+   * 精选排序权重，数字越小越靠前。用于让面试官第一眼看到最有力的项目，
+   * 而不是被"最近更新"的元项目（本站自身）占据首位。未设置时排在最后。
+   */
+  featured?: number
   tags: string[]
   startedAt?: string
   cover?: string
@@ -47,6 +58,12 @@ export function getAllProjects(): Project[] {
       }
     })
     .sort((a, b) => {
+      const featuredA = a.frontmatter.featured ?? Number.MAX_SAFE_INTEGER
+      const featuredB = b.frontmatter.featured ?? Number.MAX_SAFE_INTEGER
+      if (featuredA !== featuredB) {
+        return featuredA - featuredB
+      }
+
       const dateA = a.frontmatter.startedAt
         ? new Date(a.frontmatter.startedAt).getTime()
         : 0

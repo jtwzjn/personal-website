@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 import { profile } from '@/content/profile'
+import { resume } from '@/content/resume'
 import { Badge } from '@/components/ui/badge'
 import { Separator } from '@/components/ui/separator'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
@@ -22,11 +23,7 @@ export default function AboutPage() {
     description: profile.bio,
     email: profile.email,
     url: siteConfig.url,
-    sameAs: [
-      profile.social.github,
-      profile.social.bilibili,
-      profile.social.linkedin,
-    ],
+    sameAs: [profile.social.github, profile.social.bilibili].filter(Boolean),
   }
 
   return (
@@ -107,15 +104,22 @@ export default function AboutPage() {
                   <CardTitle className="text-base">技能栈</CardTitle>
                 </CardHeader>
                 <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {profile.skills.map((skill) => (
-                      <Badge
-                        key={skill}
-                        variant="secondary"
-                        className="bg-accent/60 px-3 py-1.5 text-sm font-medium"
-                      >
-                        {skill}
-                      </Badge>
+                  <div className="flex flex-col gap-4">
+                    {resume.skillGroups.map((group) => (
+                      <div key={group.label} className="flex flex-col gap-2">
+                        <p className="section-label">{group.label}</p>
+                        <div className="flex flex-wrap gap-2">
+                          {group.items.map((item) => (
+                            <Badge
+                              key={item}
+                              variant="secondary"
+                              className="bg-accent/60 px-3 py-1.5 text-sm font-medium"
+                            >
+                              {item}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
                     ))}
                   </div>
                 </CardContent>
@@ -158,6 +162,13 @@ export default function AboutPage() {
                     className="text-foreground hover:text-industrial font-medium underline-offset-4 transition-colors hover:underline"
                   >
                     项目页面
+                  </Link>
+                  ，完整信息见
+                  <Link
+                    href="/resume"
+                    className="text-foreground hover:text-industrial font-medium underline-offset-4 transition-colors hover:underline"
+                  >
+                    在线简历
                   </Link>
                   。
                 </p>

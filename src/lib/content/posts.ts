@@ -8,6 +8,7 @@ export interface PostFrontmatter {
   publishedAt: string
   updatedAt?: string
   tags: string[]
+  category: string
   cover?: string
   draft: boolean
 }
@@ -25,11 +26,14 @@ interface PostRow {
   content: string
   cover: string | null
   tags: string[]
+  category: string | null
   draft: boolean
   published_at: string | null
   updated_at: string
   created_at: string
 }
+
+export const DEFAULT_CATEGORY = '技术'
 
 function mapRowToPost(row: PostRow): Post {
   return {
@@ -41,6 +45,7 @@ function mapRowToPost(row: PostRow): Post {
       publishedAt: row.published_at ?? row.created_at,
       updatedAt: row.updated_at !== row.published_at ? row.updated_at : undefined,
       tags: row.tags ?? [],
+      category: row.category ?? DEFAULT_CATEGORY,
       cover: row.cover ?? undefined,
       draft: row.draft,
     },
@@ -48,15 +53,40 @@ function mapRowToPost(row: PostRow): Post {
   }
 }
 
-export async function getAllPosts(includeDrafts = false): Promise<Post[]> {
+export async function getAllPosts(
+  includeDrafts = false,
+  category?: string
+): Promise<Post[]> {
   const result = await query(
     `SELECT * FROM posts
      WHERE ($1 = true OR draft = false)
+       AND ($2::text IS NULL OR category = $2)
      ORDER BY published_at DESC NULLS LAST, created_at DESC`,
-    [includeDrafts]
+    [includeDrafts, category ?? null]
   )
 
   return (result.rows as PostRow[]).map(mapRowToPost)
+}
+
+export interface CategoryCount {
+  category: string
+  count: number
+}
+
+/** 返回所有已发布文章的栏目及数量，用于博客列表的筛选入口。 */
+export async function getAllCategories(): Promise<CategoryCount[]> {
+  const result = await query(
+    `SELECT category, COUNT(*)::int AS count
+     FROM posts
+     WHERE draft = false
+     GROUP BY category
+     ORDER BY count DESC, category ASC`
+  )
+
+  return (result.rows as { category: string; count: number }[]).map((row) => ({
+    category: row.category,
+    count: row.count,
+  }))
 }
 
 export async function getPostBySlug(slug: string, includeDrafts = false): Promise<Post | null> {
@@ -137,6 +167,7 @@ export interface CreatePostInput {
   content: string
   cover?: string
   tags: string[]
+  category: string
   draft: boolean
   publishedAt?: string
 }
@@ -147,8 +178,8 @@ export interface UpdatePostInput extends Partial<CreatePostInput> {
 
 export async function createPost(input: CreatePostInput): Promise<Post> {
   const result = await query(
-    `INSERT INTO posts (slug, title, description, content, cover, tags, draft, published_at)
-     VALUES ($1, $2, $3, $4, $5, $6, $7, $8)
+    `INSERT INTO posts (slug, title, description, content, cover, tags, category, draft, published_at)
+     VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9)
      RETURNING *`,
     [
       input.slug,
@@ -157,6 +188,7 @@ export async function createPost(input: CreatePostInput): Promise<Post> {
       input.content,
       input.cover ?? null,
       input.tags,
+      input.category,
       input.draft,
       input.publishedAt ?? null,
     ]
@@ -198,6 +230,10 @@ export async function updatePost(id: string, input: UpdatePostInput): Promise<Po
   if (input.tags !== undefined) {
     updates.push(`tags = $${paramIndex++}`)
     values.push(input.tags)
+  }
+  if (input.category !== undefined) {
+    updates.push(`category = $${paramIndex++}`)
+    values.push(input.category)
   }
   if (input.draft !== undefined) {
     updates.push(`draft = $${paramIndex++}`)
