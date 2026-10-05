@@ -126,24 +126,36 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           </div>
         </section>
 
-        <section className="glass-card mt-8 rounded-2xl p-5">
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
-              <span className="text-sm font-medium">开发进度</span>
-              {project.frontmatter.startedAt && (
-                <span className="text-muted-foreground inline-flex items-center gap-1.5 text-xs"
-                >
-                  <Calendar className="h-3.5 w-3.5" />
-                  始于 {new Date(project.frontmatter.startedAt).getFullYear()}
-                </span>
-              )}
+        {/*
+          仅在进行中的项目展示进度条。已完成/已归档项目显示「进度 100%」没有信息量，
+          状态已由上方 StatusBadge 表达，这里改为展示项目周期。
+        */}
+        {project.frontmatter.status === 'in-progress' ? (
+          <section className="glass-card mt-8 rounded-2xl p-5">
+            <div className="flex flex-wrap items-center justify-between gap-3">
+              <div className="flex items-center gap-2">
+                <span className="text-sm font-medium">开发进度</span>
+                {project.frontmatter.startedAt && (
+                  <span className="text-muted-foreground inline-flex items-center gap-1.5 text-xs">
+                    <Calendar className="h-3.5 w-3.5" />
+                    始于 {new Date(project.frontmatter.startedAt).getFullYear()}
+                  </span>
+                )}
+              </div>
+              <span className="font-mono text-sm font-semibold">
+                {project.frontmatter.progress}%
+              </span>
             </div>
-            <span className="font-mono text-sm font-semibold">
-              {project.frontmatter.progress}%
-            </span>
-          </div>
-          <Progress value={project.frontmatter.progress} className="mt-3" />
-        </section>
+            <Progress value={project.frontmatter.progress} className="mt-3" />
+          </section>
+        ) : (
+          project.frontmatter.startedAt && (
+            <p className="text-muted-foreground mt-6 inline-flex items-center gap-1.5 text-sm">
+              <Calendar className="h-3.5 w-3.5" />
+              项目周期：{new Date(project.frontmatter.startedAt).getFullYear()} 年
+            </p>
+          )
+        )}
 
         <Separator className="my-12" />
 
