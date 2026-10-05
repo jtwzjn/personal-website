@@ -148,7 +148,7 @@ export function PostFormFields({ defaultValues }: PostFormFieldsProps) {
             id="category"
             name="category"
             defaultValue={defaultValues?.category ?? '技术'}
-            className="bg-background/50 w-full rounded-xl border border-input px-4 py-2 text-sm outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/50"
+            className="bg-background/50 border-input focus:border-ring focus:ring-ring/50 w-full rounded-xl border px-4 py-2 text-sm transition-colors outline-none focus:ring-2"
           >
             <option value="技术">技术</option>
             <option value="日常">日常</option>
@@ -173,8 +173,7 @@ export function PostFormFields({ defaultValues }: PostFormFieldsProps) {
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
           <Label htmlFor="content">正文（Markdown）</Label>
-          <Label className="inline-flex cursor-pointer items-center gap-2 text-sm text-muted-foreground hover:text-foreground"
-          >
+          <Label className="text-muted-foreground hover:text-foreground inline-flex cursor-pointer items-center gap-2 text-sm">
             {uploading ? (
               <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" />
             ) : (
@@ -201,7 +200,7 @@ export function PostFormFields({ defaultValues }: PostFormFieldsProps) {
           placeholder="使用 Markdown 编写正文..."
           required
           rows={20}
-          className="bg-background/50 w-full resize-y rounded-xl border border-input px-4 py-3 text-sm font-mono leading-relaxed outline-none transition-colors focus:border-ring focus:ring-2 focus:ring-ring/50"
+          className="bg-background/50 border-input focus:border-ring focus:ring-ring/50 w-full resize-y rounded-xl border px-4 py-3 font-mono text-sm leading-relaxed transition-colors outline-none focus:ring-2"
         />
       </div>
     </>

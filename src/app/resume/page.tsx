@@ -46,7 +46,7 @@ export default function ResumePage() {
             </a>
           </div>
 
-          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 text-sm text-muted-foreground">
+          <div className="text-muted-foreground flex flex-wrap items-center gap-x-6 gap-y-2 text-sm">
             <a
               href={siteConfig.links.email}
               className="hover:text-foreground inline-flex items-center gap-2 transition-colors"
@@ -85,7 +85,10 @@ export default function ResumePage() {
                   {role}
                 </Badge>
               ))}
-              <Badge variant="outline" className="px-3 py-1 text-sm font-medium">
+              <Badge
+                variant="outline"
+                className="px-3 py-1 text-sm font-medium"
+              >
                 {jobIntention.availability}
               </Badge>
             </div>
@@ -119,7 +122,9 @@ export default function ResumePage() {
                 </div>
 
                 {item.gpa && (
-                  <p className="text-muted-foreground mt-3 text-sm">{item.gpa}</p>
+                  <p className="text-muted-foreground mt-3 text-sm">
+                    {item.gpa}
+                  </p>
                 )}
 
                 {item.courses && item.courses.length > 0 && (
@@ -172,11 +177,7 @@ export default function ResumePage() {
 
       {/* 项目经历 */}
       <section className="mt-10">
-        <SectionTitle
-          icon={Briefcase}
-          label="Projects"
-          title="主要项目经历"
-        />
+        <SectionTitle icon={Briefcase} label="Projects" title="主要项目经历" />
         <div className="mt-6 grid gap-5">
           {resume.projectHighlights.map((project) => (
             <Card key={project.slug} className="glass-card border-0">
@@ -233,7 +234,10 @@ export default function ResumePage() {
           />
           <div className="mt-6 grid gap-4">
             {experiences.map((item) => (
-              <Card key={`${item.org}-${item.period}`} className="glass-card border-0">
+              <Card
+                key={`${item.org}-${item.period}`}
+                className="glass-card border-0"
+              >
                 <CardContent className="pt-6">
                   <div className="flex flex-wrap items-start justify-between gap-3">
                     <div className="flex flex-col gap-1">

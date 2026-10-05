@@ -36,8 +36,7 @@ export default function AboutPage() {
         <section className="grid gap-12 lg:grid-cols-[280px_1fr]">
           <div className="flex flex-col gap-6">
             <div className="glass-strong rounded-3xl p-6">
-              <div className="relative mx-auto aspect-square w-48 overflow-hidden rounded-2xl bg-gradient-to-br from-industrial/20 to-industrial-muted/10 ring-1 ring-border sm:w-56"
-              >
+              <div className="from-industrial/20 to-industrial-muted/10 ring-border relative mx-auto aspect-square w-48 overflow-hidden rounded-2xl bg-gradient-to-br ring-1 sm:w-56">
                 {profile.avatar ? (
                   <Image
                     src={profile.avatar}
@@ -48,8 +47,7 @@ export default function AboutPage() {
                     priority
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center text-5xl font-bold text-industrial"
-                  >
+                  <div className="text-industrial flex h-full w-full items-center justify-center text-5xl font-bold">
                     {profile.name.charAt(0).toUpperCase()}
                   </div>
                 )}
@@ -58,8 +56,7 @@ export default function AboutPage() {
               <div className="mt-6 text-center">
                 <p className="text-xl font-semibold">{profile.name}</p>
                 <p className="text-muted-foreground mt-1">{profile.role}</p>
-                <div className="mt-4 flex items-center justify-center gap-1 text-sm text-muted-foreground"
-                >
+                <div className="text-muted-foreground mt-4 flex items-center justify-center gap-1 text-sm">
                   <MapPin className="h-3.5 w-3.5" />
                   {profile.location}
                 </div>
@@ -92,7 +89,9 @@ export default function AboutPage() {
                 {profile.bio}
               </p>
               <p className="text-muted-foreground max-w-2xl leading-relaxed">
-                中国海洋大学在读学生，专注于数据可视化、全栈开发与 AI 应用。热衷于将复杂数据转化为清晰洞察，并通过现代 Web 技术落地为稳定、可扩展的产品。
+                中国海洋大学在读学生，专注于数据可视化、全栈开发与 AI
+                应用。热衷于将复杂数据转化为清晰洞察，并通过现代 Web
+                技术落地为稳定、可扩展的产品。
               </p>
             </div>
 

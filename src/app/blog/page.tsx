@@ -55,7 +55,11 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
       </section>
 
       <section className="mt-8">
-        <div className="flex flex-wrap gap-2" role="tablist" aria-label="文章栏目">
+        <div
+          className="flex flex-wrap gap-2"
+          role="tablist"
+          aria-label="文章栏目"
+        >
           {tabs.map((tab) => {
             const isActive = tab.value === activeCategory
             const href =
@@ -76,7 +80,9 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                 }
               >
                 {tab.label}
-                <span className="font-mono text-xs opacity-70">{tab.count}</span>
+                <span className="font-mono text-xs opacity-70">
+                  {tab.count}
+                </span>
               </Link>
             )
           })}
@@ -95,7 +101,10 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 {tags.map((tag) => (
-                  <Link key={tag} href={`/blog/tags/${encodeURIComponent(tag)}`}>
+                  <Link
+                    key={tag}
+                    href={`/blog/tags/${encodeURIComponent(tag)}`}
+                  >
                     <Badge
                       variant="secondary"
                       className="bg-accent/60 hover:bg-accent px-3 py-1 text-sm font-medium transition-colors"
@@ -135,18 +144,15 @@ export default async function BlogPage({ searchParams }: BlogPageProps) {
                         >
                           {post.frontmatter.category}
                         </Badge>
-                        <h2 className="group-hover:text-industrial text-xl font-semibold tracking-tight transition-colors"
-                        >
+                        <h2 className="group-hover:text-industrial text-xl font-semibold tracking-tight transition-colors">
                           {post.frontmatter.title}
                         </h2>
                       </div>
-                      <p className="text-muted-foreground line-clamp-2 max-w-2xl"
-                      >
+                      <p className="text-muted-foreground line-clamp-2 max-w-2xl">
                         {post.frontmatter.description}
                       </p>
                       <div className="mt-1 flex flex-wrap items-center gap-3 text-sm">
-                        <span className="text-muted-foreground inline-flex items-center gap-1.5"
-                        >
+                        <span className="text-muted-foreground inline-flex items-center gap-1.5">
                           <Calendar className="h-3.5 w-3.5" />
                           {formatDate(post.frontmatter.publishedAt)}
                         </span>

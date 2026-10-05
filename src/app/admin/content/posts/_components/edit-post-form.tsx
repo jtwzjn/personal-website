@@ -45,7 +45,9 @@ export function EditPostForm({ post, action }: EditPostFormProps) {
 
       <div className="flex items-center justify-end gap-4 pt-4">
         <Link href="/admin/content/posts">
-          <Button type="button" variant="outline">取消</Button>
+          <Button type="button" variant="outline">
+            取消
+          </Button>
         </Link>
         <Button
           type="submit"

@@ -30,7 +30,8 @@ function parsePostFormData(formData: FormData): CreatePostInput {
   const category =
     String(formData.get('category') ?? '').trim() || DEFAULT_CATEGORY
   const draft = formData.get('draft') === 'on'
-  const publishedAt = String(formData.get('publishedAt') ?? '').trim() || undefined
+  const publishedAt =
+    String(formData.get('publishedAt') ?? '').trim() || undefined
 
   if (!slug || !title || !description || !content) {
     throw new Error('Slug, title, description and content are required')
@@ -75,7 +76,9 @@ function parseUpdateFormData(formData: FormData): UpdatePostInput {
   if (slug) {
     const slugRegex = /^[a-z0-9]+(?:-[a-z0-9]+)*$/
     if (!slugRegex.test(slug)) {
-      throw new Error('Slug must be lowercase letters, numbers, and hyphens only')
+      throw new Error(
+        'Slug must be lowercase letters, numbers, and hyphens only'
+      )
     }
     input.slug = slug
   }

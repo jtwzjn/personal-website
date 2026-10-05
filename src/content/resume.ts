@@ -125,11 +125,22 @@ export const resume: Resume = {
     },
     {
       label: '后端与接口开发',
-      items: ['Flask', 'RESTful API 设计', '数据库建模与索引优化', '连接池与缓存优化'],
+      items: [
+        'Flask',
+        'RESTful API 设计',
+        '数据库建模与索引优化',
+        '连接池与缓存优化',
+      ],
     },
     {
       label: '前端与数据可视化',
-      items: ['Vue 3', 'ECharts', 'D3.js', 'Leaflet / GeoJSON', 'React / Next.js'],
+      items: [
+        'Vue 3',
+        'ECharts',
+        'D3.js',
+        'Leaflet / GeoJSON',
+        'React / Next.js',
+      ],
     },
     {
       label: '云平台与工程工具',

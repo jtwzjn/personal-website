@@ -22,9 +22,7 @@ async function migrate() {
     return
   }
 
-  const files = fs
-    .readdirSync(postsDir)
-    .filter((file) => file.endsWith('.md'))
+  const files = fs.readdirSync(postsDir).filter((file) => file.endsWith('.md'))
 
   for (const file of files) {
     const filePath = path.join(postsDir, file)

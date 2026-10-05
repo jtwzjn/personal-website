@@ -18,8 +18,10 @@ export default defineConfig({
     },
   ],
   webServer: {
-    command: 'npm run build && npm run start',
+    // 项目统一使用 pnpm（原为 npm，与实际工具链不一致）
+    command: 'pnpm run build && pnpm run start',
     url: 'http://localhost:3000',
     reuseExistingServer: !process.env.CI,
+    timeout: 300_000,
   },
 })

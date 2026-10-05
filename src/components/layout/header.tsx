@@ -3,6 +3,7 @@ import Image from 'next/image'
 import { siteConfig } from '@/content/site.config'
 import { profile } from '@/content/profile'
 import { Github } from 'lucide-react'
+import { ThemeToggle } from '@/components/layout/theme-toggle'
 
 const navItems = [
   { href: '/about', label: '关于' },
@@ -20,7 +21,7 @@ export function Header() {
           className="group flex items-center gap-2 text-sm font-semibold tracking-tight transition-opacity hover:opacity-80"
           aria-label={`${siteConfig.name} 首页`}
         >
-          <span className="relative inline-flex h-7 w-7 overflow-hidden rounded-full ring-1 ring-border">
+          <span className="ring-border relative inline-flex h-7 w-7 overflow-hidden rounded-full ring-1">
             <Image
               src={profile.avatar}
               alt={siteConfig.name}
@@ -51,6 +52,7 @@ export function Header() {
           >
             <Github className="h-[18px] w-[18px]" />
           </a>
+          <ThemeToggle />
         </nav>
       </div>
     </header>

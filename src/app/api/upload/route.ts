@@ -17,10 +17,7 @@ export async function POST(request: NextRequest) {
     const file = formData.get('file') as File | null
 
     if (!file || file.size === 0) {
-      return NextResponse.json(
-        { error: 'No file provided' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'No file provided' }, { status: 400 })
     }
 
     if (!file.type.startsWith('image/')) {
@@ -50,9 +47,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json(
       {
         error:
-          error instanceof Error
-            ? error.message
-            : 'Failed to upload image',
+          error instanceof Error ? error.message : 'Failed to upload image',
       },
       { status: 500 }
     )

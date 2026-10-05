@@ -88,7 +88,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
 
         <section className="flex flex-col gap-6">
           {project.frontmatter.cover && (
-            <div className="relative aspect-[21/9] w-full overflow-hidden rounded-3xl bg-muted">
+            <div className="bg-muted relative aspect-[21/9] w-full overflow-hidden rounded-3xl">
               <Image
                 src={project.frontmatter.cover}
                 alt={project.frontmatter.title}
@@ -97,7 +97,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                 sizes="100vw"
                 priority
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-background/60 to-transparent" />
+              <div className="from-background/60 absolute inset-0 bg-gradient-to-t to-transparent" />
             </div>
           )}
 
@@ -152,7 +152,10 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
           project.frontmatter.startedAt && (
             <p className="text-muted-foreground mt-6 inline-flex items-center gap-1.5 text-sm">
               <Calendar className="h-3.5 w-3.5" />
-              项目周期：{new Date(project.frontmatter.startedAt).getFullYear()} 年
+              项目周期：{new Date(
+                project.frontmatter.startedAt
+              ).getFullYear()}{' '}
+              年
             </p>
           )
         )}
@@ -219,7 +222,7 @@ export default async function ProjectPage({ params }: ProjectPageProps) {
                       href={`https://github.com/${project.frontmatter.githubRepo}`}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className="text-foreground hover:text-industrial inline-flex items-center gap-2 break-all font-mono text-sm transition-colors hover:underline"
+                      className="text-foreground hover:text-industrial inline-flex items-center gap-2 font-mono text-sm break-all transition-colors hover:underline"
                     >
                       <Github className="h-4 w-4 shrink-0" />
                       {project.frontmatter.githubRepo}

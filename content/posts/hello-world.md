@@ -20,12 +20,12 @@ draft: false
 
 ## 技术栈
 
-| 层 | 技术 |
-|---|---|
-| 框架 | Next.js 16 App Router |
+| 层   | 技术                        |
+| ---- | --------------------------- |
+| 框架 | Next.js 16 App Router       |
 | 样式 | Tailwind CSS 4 + 毛玻璃设计 |
 | 内容 | Markdown + YAML frontmatter |
-| 后台 | Decap CMS |
-| 部署 | Vercel |
+| 后台 | Decap CMS                   |
+| 部署 | Vercel                      |
 
 期待在这里持续输出有价值的内容。

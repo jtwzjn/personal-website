@@ -39,7 +39,7 @@ export default function ProjectsPage() {
             className="group focus-visible:outline-none"
           >
             <Card className="glass-card h-full overflow-hidden border-0">
-              <div className="relative aspect-[16/9] w-full overflow-hidden bg-muted">
+              <div className="bg-muted relative aspect-[16/9] w-full overflow-hidden">
                 {project.frontmatter.cover ? (
                   <Image
                     src={project.frontmatter.cover}
@@ -49,7 +49,7 @@ export default function ProjectsPage() {
                     sizes="(max-width: 768px) 100vw, 50vw"
                   />
                 ) : (
-                  <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-muted to-accent">
+                  <div className="from-muted to-accent flex h-full w-full items-center justify-center bg-gradient-to-br">
                     <span className="text-muted-foreground text-2xl font-bold">
                       {project.frontmatter.title.slice(0, 2)}
                     </span>
@@ -63,7 +63,9 @@ export default function ProjectsPage() {
 
               <CardHeader className="pb-2">
                 <div className="flex flex-col gap-2">
-                  <CardTitle className="text-lg">{project.frontmatter.title}</CardTitle>
+                  <CardTitle className="text-lg">
+                    {project.frontmatter.title}
+                  </CardTitle>
                   <CardDescription className="line-clamp-2">
                     {project.frontmatter.description}
                   </CardDescription>

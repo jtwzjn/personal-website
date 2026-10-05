@@ -43,7 +43,8 @@ function mapRowToPost(row: PostRow): Post {
       title: row.title,
       description: row.description,
       publishedAt: row.published_at ?? row.created_at,
-      updatedAt: row.updated_at !== row.published_at ? row.updated_at : undefined,
+      updatedAt:
+        row.updated_at !== row.published_at ? row.updated_at : undefined,
       tags: row.tags ?? [],
       category: row.category ?? DEFAULT_CATEGORY,
       cover: row.cover ?? undefined,
@@ -89,7 +90,10 @@ export async function getAllCategories(): Promise<CategoryCount[]> {
   }))
 }
 
-export async function getPostBySlug(slug: string, includeDrafts = false): Promise<Post | null> {
+export async function getPostBySlug(
+  slug: string,
+  includeDrafts = false
+): Promise<Post | null> {
   const result = await query(
     `SELECT * FROM posts
      WHERE slug = $1 AND ($2 = true OR draft = false)`,
@@ -111,7 +115,9 @@ export async function getAllPostSlugs(): Promise<string[]> {
   return result.rows.map((row) => (row as { slug: string }).slug)
 }
 
-export async function getPostMetaForSitemap(): Promise<{ slug: string; lastModified: Date }[]> {
+export async function getPostMetaForSitemap(): Promise<
+  { slug: string; lastModified: Date }[]
+> {
   const result = await query(
     `SELECT slug, updated_at FROM posts WHERE draft = false ORDER BY published_at DESC`
   )
@@ -197,7 +203,10 @@ export async function createPost(input: CreatePostInput): Promise<Post> {
   return mapRowToPost(result.rows[0] as PostRow)
 }
 
-export async function updatePost(id: string, input: UpdatePostInput): Promise<Post | null> {
+export async function updatePost(
+  id: string,
+  input: UpdatePostInput
+): Promise<Post | null> {
   const existing = await query('SELECT * FROM posts WHERE id = $1', [id])
   if (existing.rows.length === 0) {
     return null
@@ -256,7 +265,9 @@ export async function updatePost(id: string, input: UpdatePostInput): Promise<Po
 }
 
 export async function deletePost(id: string): Promise<boolean> {
-  const result = await query('DELETE FROM posts WHERE id = $1 RETURNING id', [id])
+  const result = await query('DELETE FROM posts WHERE id = $1 RETURNING id', [
+    id,
+  ])
   return result.rows.length > 0
 }
 

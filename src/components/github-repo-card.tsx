@@ -33,7 +33,7 @@ export function GitHubRepoCard({ data }: GitHubRepoCardProps) {
         </div>
 
         {data.latestRelease && (
-          <div className="border-t border-border/50 pt-4">
+          <div className="border-border/50 border-t pt-4">
             <p className="text-sm font-medium">最新发布</p>
             <a
               href={data.latestRelease.htmlUrl}

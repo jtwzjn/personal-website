@@ -50,8 +50,7 @@ export default async function TagPage({ params }: TagPageProps) {
 
       <section className="flex flex-col gap-4">
         <span className="section-label">Tag</span>
-        <h1 className="flex items-center gap-3 text-4xl font-bold tracking-tight"
-        >
+        <h1 className="flex items-center gap-3 text-4xl font-bold tracking-tight">
           <Hash className="text-muted-foreground h-8 w-8" />
           {tag}
         </h1>
@@ -68,25 +67,19 @@ export default async function TagPage({ params }: TagPageProps) {
             className="group focus-visible:outline-none"
           >
             <Card className="glass-card border-0 p-6">
-              <div className="flex flex-col gap-2"
-              >
-                <h2 className="text-xl font-semibold tracking-tight transition-colors group-hover:text-industrial"
-                >
+              <div className="flex flex-col gap-2">
+                <h2 className="group-hover:text-industrial text-xl font-semibold tracking-tight transition-colors">
                   {post.frontmatter.title}
                 </h2>
-                <p className="text-muted-foreground line-clamp-2"
-                >
+                <p className="text-muted-foreground line-clamp-2">
                   {post.frontmatter.description}
                 </p>
-                <div className="mt-1 flex flex-wrap items-center gap-3 text-sm"
-                >
-                  <span className="text-muted-foreground inline-flex items-center gap-1.5"
-                  >
+                <div className="mt-1 flex flex-wrap items-center gap-3 text-sm">
+                  <span className="text-muted-foreground inline-flex items-center gap-1.5">
                     <Calendar className="h-3.5 w-3.5" />
                     {formatDate(post.frontmatter.publishedAt)}
                   </span>
-                  <div className="flex flex-wrap gap-2"
-                  >
+                  <div className="flex flex-wrap gap-2">
                     {post.frontmatter.tags.slice(0, 4).map((t) => (
                       <Badge
                         key={t}
@@ -106,4 +99,3 @@ export default async function TagPage({ params }: TagPageProps) {
     </div>
   )
 }
-

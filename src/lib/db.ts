@@ -2,7 +2,9 @@ import { Pool } from '@neondatabase/serverless'
 
 function getPool(): Pool | null {
   if (!process.env.POSTGRES_URL) {
-    console.warn('POSTGRES_URL is not set. Database features will be unavailable.')
+    console.warn(
+      'POSTGRES_URL is not set. Database features will be unavailable.'
+    )
     return null
   }
 

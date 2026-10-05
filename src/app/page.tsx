@@ -44,7 +44,7 @@ export default function HomePage() {
               </a>
             </div>
 
-            <div className="flex flex-wrap items-center gap-6 text-sm text-muted-foreground">
+            <div className="text-muted-foreground flex flex-wrap items-center gap-6 text-sm">
               <a
                 href={profile.social.github}
                 target="_blank"
@@ -124,7 +124,7 @@ export default function HomePage() {
               className="group focus-visible:outline-none"
             >
               <Card className="glass-card h-full overflow-hidden border-0">
-                <div className="relative aspect-[16/10] w-full overflow-hidden bg-muted">
+                <div className="bg-muted relative aspect-[16/10] w-full overflow-hidden">
                   {project.frontmatter.cover ? (
                     <Image
                       src={project.frontmatter.cover}
@@ -134,7 +134,7 @@ export default function HomePage() {
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                     />
                   ) : (
-                    <div className="flex h-full w-full items-center justify-center bg-gradient-to-br from-muted to-accent">
+                    <div className="from-muted to-accent flex h-full w-full items-center justify-center bg-gradient-to-br">
                       <span className="text-muted-foreground text-2xl font-bold">
                         {project.frontmatter.title.slice(0, 2)}
                       </span>
@@ -143,7 +143,9 @@ export default function HomePage() {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
                 </div>
                 <CardHeader className="pb-2">
-                  <CardTitle className="text-base">{project.frontmatter.title}</CardTitle>
+                  <CardTitle className="text-base">
+                    {project.frontmatter.title}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-4">
                   <p className="text-muted-foreground line-clamp-2 text-sm">
@@ -153,7 +155,9 @@ export default function HomePage() {
                     {project.frontmatter.status === 'in-progress' ? (
                       <>
                         <div className="flex justify-between text-xs">
-                          <span className="text-muted-foreground">开发进度</span>
+                          <span className="text-muted-foreground">
+                            开发进度
+                          </span>
                           <span className="font-mono font-medium">
                             {project.frontmatter.progress}%
                           </span>
@@ -186,11 +190,9 @@ export default function HomePage() {
 
 function ProfileCard({ projectCount }: { projectCount: number }) {
   return (
-    <div className="glass-strong relative rounded-3xl p-6 sm:p-8"
-    >
+    <div className="glass-strong relative rounded-3xl p-6 sm:p-8">
       <div className="flex flex-col items-center gap-5 text-center">
-        <div className="relative h-28 w-28 overflow-hidden rounded-2xl bg-gradient-to-br from-industrial/20 to-industrial-muted/10 ring-1 ring-border"
-        >
+        <div className="from-industrial/20 to-industrial-muted/10 ring-border relative h-28 w-28 overflow-hidden rounded-2xl bg-gradient-to-br ring-1">
           {profile.avatar ? (
             <Image
               src={profile.avatar}
@@ -201,23 +203,20 @@ function ProfileCard({ projectCount }: { projectCount: number }) {
               priority
             />
           ) : (
-            <div className="flex h-full w-full items-center justify-center text-3xl font-bold text-industrial"
-            >
+            <div className="text-industrial flex h-full w-full items-center justify-center text-3xl font-bold">
               {profile.name.charAt(0).toUpperCase()}
             </div>
           )}
         </div>
 
-        <div className="flex flex-col gap-1"
-        >
+        <div className="flex flex-col gap-1">
           <p className="text-lg font-semibold">{profile.name}</p>
           <p className="text-muted-foreground text-sm">{profile.role}</p>
         </div>
 
         <div className="industrial-line w-full" />
 
-        <div className="grid w-full grid-cols-2 gap-3"
-        >
+        <div className="grid w-full grid-cols-2 gap-3">
           <Stat label="项目" value={`${projectCount}`} />
           <Stat label="技术栈" value={`${allSkills.length}`} />
         </div>
@@ -228,9 +227,8 @@ function ProfileCard({ projectCount }: { projectCount: number }) {
 
 function Stat({ label, value }: { label: string; value: string }) {
   return (
-    <div className="bg-accent/40 rounded-xl px-3 py-3"
-    >
-      <p className="text-xs text-muted-foreground">{label}</p>
+    <div className="bg-accent/40 rounded-xl px-3 py-3">
+      <p className="text-muted-foreground text-xs">{label}</p>
       <p className="text-lg font-semibold">{value}</p>
     </div>
   )

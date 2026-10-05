@@ -18,8 +18,7 @@ export default async function AdminDashboardPage() {
       <section className="mt-10 grid gap-6 md:grid-cols-2">
         <Link href="/admin/content/posts">
           <div className="glass-card group rounded-2xl p-6">
-            <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent"
-            >
+            <div className="bg-accent mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl">
               <FileText className="h-6 w-6" />
             </div>
             <h2 className="text-xl font-semibold">博客文章</h2>
@@ -31,14 +30,11 @@ export default async function AdminDashboardPage() {
 
         <Link href="/">
           <div className="glass-card group rounded-2xl p-6">
-            <div className="mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl bg-accent"
-            >
+            <div className="bg-accent mb-4 inline-flex h-12 w-12 items-center justify-center rounded-xl">
               <LayoutDashboard className="h-6 w-6" />
             </div>
             <h2 className="text-xl font-semibold">返回网站</h2>
-            <p className="text-muted-foreground mt-1 text-sm">
-              返回前台首页。
-            </p>
+            <p className="text-muted-foreground mt-1 text-sm">返回前台首页。</p>
           </div>
         </Link>
       </section>

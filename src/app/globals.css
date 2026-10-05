@@ -160,11 +160,61 @@
   body {
     @apply bg-background text-foreground min-h-screen;
     background-image:
-      radial-gradient(at 0% 0%, oklch(0.8 0.05 255 / 0.12) 0px, transparent 50%),
-      radial-gradient(at 100% 0%, oklch(0.78 0.04 210 / 0.1) 0px, transparent 50%),
-      radial-gradient(at 100% 100%, oklch(0.82 0.05 300 / 0.08) 0px, transparent 50%),
-      radial-gradient(at 0% 100%, oklch(0.8 0.04 150 / 0.08) 0px, transparent 50%);
+      radial-gradient(
+        at 0% 0%,
+        oklch(0.8 0.05 255 / 0.12) 0px,
+        transparent 50%
+      ),
+      radial-gradient(
+        at 100% 0%,
+        oklch(0.78 0.04 210 / 0.1) 0px,
+        transparent 50%
+      ),
+      radial-gradient(
+        at 100% 100%,
+        oklch(0.82 0.05 300 / 0.08) 0px,
+        transparent 50%
+      ),
+      radial-gradient(
+        at 0% 100%,
+        oklch(0.8 0.04 150 / 0.08) 0px,
+        transparent 50%
+      );
     background-attachment: fixed;
+  }
+
+  /*
+   * 深色模式适配。
+   * 上面的径向光晕是按浅色底调的，深色底上会显得发灰发亮；
+   * 这里换成低明度的同类光晕，并把毛玻璃卡片的 hover 描边压暗
+   * （默认值 oklch(1 0 0 / 75%) 在深色下是一条刺眼的白边）。
+   */
+  .dark body {
+    background-image:
+      radial-gradient(
+        at 0% 0%,
+        oklch(0.45 0.06 255 / 0.22) 0px,
+        transparent 50%
+      ),
+      radial-gradient(
+        at 100% 0%,
+        oklch(0.42 0.05 210 / 0.18) 0px,
+        transparent 50%
+      ),
+      radial-gradient(
+        at 100% 100%,
+        oklch(0.46 0.05 300 / 0.15) 0px,
+        transparent 50%
+      ),
+      radial-gradient(
+        at 0% 100%,
+        oklch(0.42 0.05 150 / 0.15) 0px,
+        transparent 50%
+      );
+  }
+
+  .dark .glass-card:hover {
+    border-color: oklch(1 0 0 / 22%);
   }
 }
 
@@ -212,26 +262,40 @@
   }
 
   .text-gradient {
-    background: linear-gradient(135deg, var(--foreground) 0%, var(--industrial-muted) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--foreground) 0%,
+      var(--industrial-muted) 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .text-gradient-industrial {
-    background: linear-gradient(135deg, var(--industrial) 0%, var(--industrial-muted) 100%);
+    background: linear-gradient(
+      135deg,
+      var(--industrial) 0%,
+      var(--industrial-muted) 100%
+    );
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
   }
 
   .section-label {
-    @apply text-xs font-semibold uppercase tracking-[0.16em] text-muted-foreground;
+    @apply text-muted-foreground text-xs font-semibold tracking-[0.16em] uppercase;
   }
 
   .industrial-line {
     height: 1px;
-    background: linear-gradient(90deg, transparent 0%, var(--border) 20%, var(--border) 80%, transparent 100%);
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      var(--border) 20%,
+      var(--border) 80%,
+      transparent 100%
+    );
   }
 }
 
@@ -240,4 +304,3 @@
     @apply mx-auto w-full max-w-5xl px-4 sm:px-6 lg:px-8;
   }
 }
-

@@ -87,8 +87,7 @@ export default async function PostPage({ params }: PostPageProps) {
 
         <article className="mx-auto max-w-3xl">
           <header className="flex flex-col gap-5">
-            <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground"
-            >
+            <div className="text-muted-foreground flex flex-wrap items-center gap-3 text-sm">
               <span className="inline-flex items-center gap-1.5">
                 <Calendar className="h-4 w-4" />
                 {formatDate(post.frontmatter.publishedAt)}
@@ -110,8 +109,7 @@ export default async function PostPage({ params }: PostPageProps) {
             </p>
 
             {post.frontmatter.cover && (
-              <div className="relative aspect-[21/9] w-full overflow-hidden rounded-3xl bg-muted"
-              >
+              <div className="bg-muted relative aspect-[21/9] w-full overflow-hidden rounded-3xl">
                 <Image
                   src={post.frontmatter.cover}
                   alt={post.frontmatter.title}
@@ -125,7 +123,9 @@ export default async function PostPage({ params }: PostPageProps) {
 
             {post.frontmatter.tags.length > 0 && (
               <div className="flex flex-wrap gap-2">
-                <Link href={`/blog?category=${encodeURIComponent(post.frontmatter.category)}`}>
+                <Link
+                  href={`/blog?category=${encodeURIComponent(post.frontmatter.category)}`}
+                >
                   <Badge
                     variant="outline"
                     className="border-industrial/40 text-industrial px-3 py-1 text-sm font-medium transition-colors"
@@ -134,7 +134,10 @@ export default async function PostPage({ params }: PostPageProps) {
                   </Badge>
                 </Link>
                 {post.frontmatter.tags.map((tag) => (
-                  <Link key={tag} href={`/blog/tags/${encodeURIComponent(tag)}`}>
+                  <Link
+                    key={tag}
+                    href={`/blog/tags/${encodeURIComponent(tag)}`}
+                  >
                     <Badge
                       variant="secondary"
                       className="bg-accent/60 hover:bg-accent px-3 py-1 text-sm font-medium transition-colors"
@@ -162,4 +165,3 @@ export default async function PostPage({ params }: PostPageProps) {
     </>
   )
 }
-

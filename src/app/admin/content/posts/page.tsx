@@ -32,14 +32,13 @@ export default async function AdminPostsPage() {
           </Card>
         ) : (
           posts.map((post) => (
-            <Card
-              key={post.frontmatter.id}
-              className="glass-card border-0 p-5"
-            >
+            <Card key={post.frontmatter.id} className="glass-card border-0 p-5">
               <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
                 <div className="flex flex-col gap-2">
                   <div className="flex flex-wrap items-center gap-2">
-                    <h2 className="text-lg font-semibold">{post.frontmatter.title}</h2>
+                    <h2 className="text-lg font-semibold">
+                      {post.frontmatter.title}
+                    </h2>
                     {post.frontmatter.draft && (
                       <Badge variant="outline">草稿</Badge>
                     )}
@@ -48,8 +47,7 @@ export default async function AdminPostsPage() {
                     {post.frontmatter.description}
                   </p>
                   <div className="flex flex-wrap items-center gap-3 text-sm">
-                    <span className="text-muted-foreground inline-flex items-center gap-1.5"
-                    >
+                    <span className="text-muted-foreground inline-flex items-center gap-1.5">
                       <Calendar className="h-3.5 w-3.5" />
                       {formatDate(post.frontmatter.publishedAt)}
                     </span>
@@ -68,7 +66,9 @@ export default async function AdminPostsPage() {
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <Link href={`/admin/content/posts/${post.frontmatter.id}/edit`}>
+                  <Link
+                    href={`/admin/content/posts/${post.frontmatter.id}/edit`}
+                  >
                     <Button
                       variant="outline"
                       size="sm"
@@ -79,8 +79,16 @@ export default async function AdminPostsPage() {
                     </Button>
                   </Link>
                   <form action={deletePostAction}>
-                    <input type="hidden" name="id" value={post.frontmatter.id} />
-                    <input type="hidden" name="slug" value={post.frontmatter.slug} />
+                    <input
+                      type="hidden"
+                      name="id"
+                      value={post.frontmatter.id}
+                    />
+                    <input
+                      type="hidden"
+                      name="slug"
+                      value={post.frontmatter.slug}
+                    />
                     <Button
                       type="submit"
                       variant="outline"
