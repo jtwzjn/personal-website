@@ -75,7 +75,7 @@ export const resume: Resume = {
     // TODO: 确认目标岗位口径。当前按「国央企 / 制造业 IT」方向归纳。
     roles: ['数据开发 / 数据分析', 'IT 信息化 / 数字化'],
     cities: ['不限'], // TODO: 如有偏好请补充
-    availability: '2026 届应届毕业生', // TODO: 确认到岗时间
+    availability: '2027 届应届毕业生', // TODO: 确认具体到岗时间
     note: '期望从事数据开发、数据分析或企业信息化方向工作，可接受国央企与制造业数字化岗位。',
   },
 
@@ -86,7 +86,7 @@ export const resume: Resume = {
       // college: 'TODO 补充学院',
       major: '数据科学与大数据技术',
       degree: '本科 · 工学学士',
-      period: '2022.09 – 2026.06',
+      period: '2022.09 – 2027.06',
       // gpa: 'TODO 可选：GPA 3.x/4.0，专业前 xx%',
       // courses: ['大数据技术原理与应用', '数据分析与数据挖掘', '可视化技术', '数据库原理'],
     },
