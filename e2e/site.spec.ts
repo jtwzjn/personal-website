@@ -128,6 +128,10 @@ test.describe('项目列表与详情', () => {
     // 已完成项目展示项目周期，而不是无信息量的「进度 100%」
     await expect(page.getByText(/项目周期：\d{4} 年/)).toBeVisible()
     await expect(page.getByText('开发进度')).toHaveCount(0)
+
+    // 「系统界面」的 6 张截图确实加载成功（而非坏图）
+    const images = page.locator('article img, .prose img')
+    expect(await images.count()).toBeGreaterThanOrEqual(6)
   })
 
   test('加州项目详情页展示真实截图与 AI 实验数据', async ({ page }) => {

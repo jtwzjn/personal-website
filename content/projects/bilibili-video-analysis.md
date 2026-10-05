@@ -19,7 +19,7 @@ tags:
     'RoBERTa',
   ]
 startedAt: '2026-01-10'
-cover: '/images/projects/bilibili-video-analysis.svg'
+cover: '/images/projects/bilibili-video-analysis/01-ranking-overview.png'
 milestones:
   - title: '搭建 WSL2 + Hadoop 伪分布式 + Spark 开发环境'
     date: '2026-01-16'
@@ -103,3 +103,44 @@ Flask 后端提供 **8 个 RESTful 接口**（健康检查、分类列表、排�
 
 - 毕业论文《基于大数据的哔哩哔哩视频数据分析和综合评分可视化系统》
 - [Bilibili 系统演示视频](https://www.bilibili.com/video/BV1UNRCBgEyB/)
+
+## 系统界面
+
+> 以下截图取自系统实际运行状态。注意总览中的「视频总数」为动态值：离线采集 **1497** 个，
+> 其余由**在线按需分析**在运行期动态追加（最终入库 1505 个），因此截图中的数字会大于 1497。
+
+**1. 排行榜首页**
+
+顶部为系统总览（视频总数 / 评论总数 / 分区数量 / 平均质量系数 Q），下方排行榜直接给出每个视频的**质量系数 Q**与**排名变化**，并支持按 15 个分区筛选。
+
+![排行榜首页](/images/projects/bilibili-video-analysis/01-ranking-overview.png)
+
+**2. 动态权重 vs 静态权重**
+
+传统静态公式为固定权重（播放 / 点赞 / 投币等）。本项目在各项指标上引入评论质量系数 Q 进行动态加权——对高 Q 视频降低播放量权重、提高投币与收藏权重。
+
+![动态权重综合评分对比](/images/projects/bilibili-video-analysis/02-dynamic-vs-static-scoring.png)
+
+**3. 排名变化分析**
+
+动态权重下**排名下降最多**的视频（标题党与擦边动画类内容，Q 均值 0.46），与排名上升最多的一批（音乐歌单、深度赏析类，Q 均值 0.71）形成对照。
+
+![排名下降最多的视频](/images/projects/bilibili-video-analysis/03-rank-comparison.png)
+
+**4. 在线按需分析**
+
+输入任意 BV 号或视频链接，后端自动完成**抓取 → 清洗 → 情感推理 → Q 值计算 → 评分 → 入库**全流程，全过程实时回传进度（图中为分析进行中）。
+
+![在线按需分析](/images/projects/bilibili-video-analysis/04-online-analysis.png)
+
+**5. 视频详情页：质量系数 Q 三维分解**
+
+单个视频的静态 / 动态评分对照与排名变化，以及质量系数 Q 的三维雷达图（**S 情感倾向 / C 一致性 / D 讨论深度**）与评论情感分布。
+
+![视频详情页](/images/projects/bilibili-video-analysis/05-video-detail-q-breakdown.png)
+
+**6. 评论级情感分析结果**
+
+每条评论输出情感标签、`sentiment_score` 与 `confidence`，支持按热度 / 最新 / 最正向 / 最负向排序。
+
+![评论情感列表](/images/projects/bilibili-video-analysis/06-comment-sentiment.png)
