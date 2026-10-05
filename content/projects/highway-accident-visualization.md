@@ -29,7 +29,7 @@ milestones:
     completed: true
   - title: '气象关联与节假日对比图表模块'
     completed: true
-  - title: '系统整合：统一 6 个可视化页面与交互规范'
+  - title: '系统整合：统一 6 个视图与交互规范'
     completed: true
   - title: 'AI 模块：全加州格点事故预测与高风险区域识别'
     completed: true
