@@ -171,11 +171,12 @@ export const resume: Resume = {
       slug: 'highway-accident-visualization',
       role: '课程小组项目 · 主要开发者',
       summary:
-        '基于约 48 万条加州高速公路事故记录，构建覆盖数据接口、地理可视化、时空联动与 AI 预测的可视分析系统。',
+        '融合 143 万条加州事故记录（2022–2024）与历史气象数据（匹配率 100%），构建覆盖数据接口、地理可视化、时空联动与 AI 预测的可视分析系统。',
       highlights: [
-        '设计并实现 RESTful 数据接口层（时间 / 区域 / 混合筛选、bbox 边界框过滤）与 LRU 缓存优化',
+        '设计并实现 16 个 RESTful 接口（时间 / 区域 / 混合筛选、bbox 边界框过滤）与内存缓存 + LRU 优化，聚合结果服务端计算',
         '基于 Leaflet + GeoJSON 实现地理可视化，并完成时间轴、地图框选、平行坐标、县级点击四类时空双向联动',
-        '完成全加州格点未来事故数预测与高风险区域识别模块，并参与昇腾 MindSpore 模型在华为云 ModelArts 的训练与 API 对接',
+        'AI 模块：RandomForest + 分位数风险分级，预测 309 个时空格点未来 6 个月事故数，测试集 MAE 5.64（占均值 4.1%）',
+        '参与昇腾 MindSpore LSTM 在华为云 ModelArts 的训练与部署，通过 Notebook 推理服务 + SSH 隧道完成 API 对接',
       ],
     },
   ],
