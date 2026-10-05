@@ -54,6 +54,10 @@ test-results/
 # 个人资料收集表：含隐私信息，仅本地保留，绝不提交
 *.local.md
 *.local.json
+*.local.ps1
+
+# 临时暂存目录（跨仓库搬运产物时使用，不属于本站源码）
+.staging-*/
 
 # logs
 *.log

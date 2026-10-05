@@ -158,11 +158,11 @@ export const resume: Resume = {
       slug: 'bilibili-video-analysis',
       role: '本科毕业设计 · 独立完成',
       summary:
-        '采集 1497 个视频与 34 万条评论，构建 Hadoop + Spark + RoBERTa + Flask + Vue 3 的端到端视频质量评价系统。',
+        '本科毕业设计：采集 1497 个视频（15 个内容分区）与 377,892 条原始评论，经 PySpark 清洗后入库 342,450 条，构建 Hadoop + Spark + RoBERTa + Flask + Vue 3 的端到端视频质量评价系统。',
       highlights: [
-        '在 WSL2 中从零搭建 Hadoop 伪分布式集群与 Spark，用 PySpark 完成清洗流水线，Parquet 存储比 JSON 省约 70% 空间、读取提速约 5 倍',
-        '集成 Erlangshen-RoBERTa 完成 34 万条评论情感分析，GPU 推理约 200 条/秒',
-        '提出动态权重综合评分模型（评论质量系数 Q），使情感分数标准差由 0.629 提升至 0.783',
+        '在 WSL2 中从零搭建 Hadoop 3.3.6 伪分布式集群与 Spark 3.5.8，用 PySpark 完成清洗流水线，Parquet + Snappy 存储比 JSON 省约 70% 空间、读取提速约 5 倍',
+        '集成 Erlangshen-RoBERTa 完成 34 万条评论情感分析，GPU 分块批处理 + 断点续传，约 200 条/秒',
+        '提出评论质量系数 Q（情感倾向 / 一致性 / 讨论深度三维建模）与动态权重评分模型，情感分数标准差由 0.629 提升至 0.783',
       ],
     },
     {
