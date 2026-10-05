@@ -128,10 +128,6 @@ test.describe('项目列表与详情', () => {
     // 已完成项目展示项目周期，而不是无信息量的「进度 100%」
     await expect(page.getByText(/项目周期：\d{4} 年/)).toBeVisible()
     await expect(page.getByText('开发进度')).toHaveCount(0)
-
-    // 「系统界面」的 6 张截图确实加载成功（而非坏图）
-    const images = page.locator('article img, .prose img')
-    expect(await images.count()).toBeGreaterThanOrEqual(6)
   })
 
   test('加州项目详情页展示真实截图与 AI 实验数据', async ({ page }) => {
@@ -142,17 +138,36 @@ test.describe('项目列表与详情', () => {
     )
     await expect(page.getByText('1,434,106').first()).toBeVisible()
 
-    // 系统截图确实加载成功（而非坏图）
-    const images = page.locator('article img, .prose img')
-    const count = await images.count()
-    expect(count).toBeGreaterThanOrEqual(5)
-
     // 源码链接
     await expect(
       page.locator(
         'a[href="https://github.com/jtwzjn/highway-accident-visualization"]'
       )
     ).toBeVisible()
+  })
+
+  test('三个项目详情页都展示真实截图，且不再有 SVG 占位封面', async ({
+    page,
+  }) => {
+    const expectations: Array<[string, number]> = [
+      ['/projects/bilibili-video-analysis', 6],
+      ['/projects/highway-accident-visualization', 5],
+      ['/projects/personal-website', 5],
+    ]
+
+    for (const [path, min] of expectations) {
+      await page.goto(path)
+
+      const images = page.locator('article img, .prose img')
+      const count = await images.count()
+      expect(count, `${path} 的截图数量不足`).toBeGreaterThanOrEqual(min)
+
+      // 占位图（SVG）应已全部被真实截图替换
+      expect(
+        await page.locator('article img[src$=".svg"]').count(),
+        `${path} 仍存在 SVG 占位图`
+      ).toBe(0)
+    }
   })
 
   test('进行中的项目展示进度条，已完成项目展示项目周期', async ({ page }) => {

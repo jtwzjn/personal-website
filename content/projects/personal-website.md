@@ -63,6 +63,10 @@ milestones:
 
 ![简历页](/images/projects/personal-website/02-resume.png)
 
+**项目列表**：三个项目的封面均取自各自系统的真实界面。
+
+![项目列表](/images/projects/personal-website/03-projects.png)
+
 **博客列表**：技术 / 日常栏目筛选与标签导航。内容存储在 PostgreSQL，可通过后台在线编辑，无需重新部署即可发布。
 
 ![博客列表](/images/projects/personal-website/04-blog.png)
