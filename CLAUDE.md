@@ -151,6 +151,7 @@ pnpm run test:e2e                         # 会自动构建并启动服务（需
 ## Notes for Future Sessions
 
 - 使用 `pnpm`，不要用 `npm`。
+- **pnpm 版本由 `package.json` 的 `packageManager` 字段声明**（当前 `pnpm@11.7.0`），CI 的 `pnpm/action-setup` 会自动读取它。不要在 workflow 里再写死 `version:`——一旦该版本与 `pnpm-workspace.yaml` 所需的版本不兼容，`actions/setup-node` 的 `cache: 'pnpm'` 会执行 `pnpm store path` 而直接失败（历史上 CI 每个 job 都倒在 Setup Node.js，从未跑到 lint）。
 - 本地构建若报 `EXDEV: cross-device link not permitted`，是 telemetry 写 `%APPDATA%\nextjs-nodejs\Config` 导致；`dev` / `build` 脚本已设 `NEXT_TELEMETRY_DISABLED=1`。
 - 不要提交 `.claude/`、`.env*`、`node_modules`、`.next`、`*.memory.md`、`*.local.md`、`*.local.sh`。
 - 站点标题保持 `今天我在家呐`，所有者保持 `hcr`，除非明确要求修改。

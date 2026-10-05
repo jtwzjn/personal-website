@@ -1,5 +1,4 @@
 allowBuilds:
-  '@sentry/cli': true
   bufferutil: true
   esbuild: true
   sharp: true

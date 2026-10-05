@@ -2,6 +2,10 @@
   "name": "personal-website",
   "version": "0.1.0",
   "private": true,
+  "packageManager": "pnpm@11.7.0",
+  "engines": {
+    "node": ">=22"
+  },
   "scripts": {
     "dev": "cross-env NEXT_TELEMETRY_DISABLED=1 next dev --turbopack",
     "build": "tsx scripts/migrate.ts && tsx scripts/migrate-posts.ts && cross-env NEXT_TELEMETRY_DISABLED=1 next build",
